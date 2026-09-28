@@ -45,131 +45,114 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: FractionallySizedBox(
-              alignment: Alignment.topCenter,
-              heightFactor: 0.35,
-              child: Container(
-                decoration: BoxDecoration(
-                  image: const DecorationImage(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Bagian foto 4 anggota dengan rasio 1:1 agar foto utuh dan tidak terpotong
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                AspectRatio(
+                  aspectRatio: 1.0,
+                  child: Image.asset(
+                    'assets/background.jpeg',
                     fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
-                    image: AssetImage(
-                      'assets/background.jpeg',
+                    width: double.infinity,
+                  ),
+                ),
+                Container(
+                  width: 90.0,
+                  height: 90.0,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.5),
+                        blurRadius: 10,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                    image: const DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage(
+                        'assets/avatar.jpeg',
+                      ),
                     ),
                   ),
-                  color: const Color.fromARGB(
-                    255,
-                    255,
-                    252,
-                    252,
-                  ).withValues(alpha: 128),
                 ),
+              ],
+            ),
+            const SizedBox(height: 20.0),
+            const Text(
+              'Anggota Kelompok 32',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 13, 105, 225),
               ),
             ),
-          ),
-          SafeArea(
-            child: Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 20.0,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 100.0,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.2),
-                            blurRadius: 8,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                        image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            'assets/avatar.jpeg',
-                          ),
+            const SizedBox(height: 12.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: [
+                  for (var member in teamMembers)
+                    Card(
+                      margin: const EdgeInsets.symmetric(vertical: 6.0),
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 12.0,
+                        ),
+                        child: Row(
+                          children: [
+                            const CircleAvatar(
+                              backgroundColor:
+                                  Color.fromARGB(255, 13, 105, 225),
+                              radius: 20,
+                              child: Icon(
+                                Icons.person,
+                                color: Colors.white,
+                                size: 22,
+                              ),
+                            ),
+                            const SizedBox(width: 14.0),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    member['Nama'] ?? 'No Name',
+                                    style: const TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4.0),
+                                  Text(
+                                    member['NIM'] ?? 'No NIM',
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
-                      'Anggota Kelompok 32',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 13, 105, 225),
-                      ),
-                    ),
-                    const SizedBox(height: 12.0),
-                    for (var member in teamMembers)
-                      Card(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 8.0,
-                          vertical: 6.0,
-                        ),
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 12.0,
-                          ),
-                          child: Row(
-                            children: [
-                              const CircleAvatar(
-                                backgroundColor:
-                                    Color.fromARGB(255, 13, 105, 225),
-                                radius: 20,
-                                child: Icon(
-                                  Icons.person,
-                                  color: Colors.white,
-                                  size: 22,
-                                ),
-                              ),
-                              const SizedBox(width: 14.0),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      member['Nama'] ?? 'No Name',
-                                      style: const TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4.0),
-                                    Text(
-                                      member['NIM'] ?? 'No NIM',
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: Colors.grey[700],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
+                ],
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 24.0),
+          ],
+        ),
       ),
     );
   }
