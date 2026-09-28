@@ -45,8 +45,14 @@ void main() {
     // Switch to Profile
     await tester.tap(find.text('Profile'));
     await tester.pumpAndSettle();
+    expect(find.text('Jhon Filbert Tarigan'), findsOneWidget);
+    expect(find.text('21120124140165'), findsOneWidget);
     expect(find.text('Alif Arlendi Putra Priyanto'), findsOneWidget);
     expect(find.text('21120123140042'), findsOneWidget);
+    expect(find.text('Fitrandi Sabila Mustaqim'), findsOneWidget);
+    expect(find.text('21120124130061'), findsOneWidget);
+    expect(find.text('Mikail Hikam Altiyar'), findsOneWidget);
+    expect(find.text('21120124130102'), findsOneWidget);
 
     // Return to Home via Home icon on Profile AppBar
     await tester.tap(find.byIcon(Icons.home).first);
