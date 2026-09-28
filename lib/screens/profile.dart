@@ -46,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     fit: BoxFit.cover,
                     alignment: Alignment.topCenter,
                     image: AssetImage(
-                      'assets/background.jpg',
+                      'assets/background.jpeg',
                     ),
                   ),
                   color: const Color.fromARGB(
@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        'assets/avatar.jpg',
+                        'assets/avatar.jpeg',
                       ),
                     ),
                   ),
